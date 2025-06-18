@@ -3,33 +3,43 @@
 [![CI/CD](https://github.com/Matthieu/Jomacs_DevOps/actions/workflows/lamda.yml/badge.svg)](https://github.com/Matthieu/Jomacs_DevOps/actions/workflows/lamda.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
+## Table of Contents
+
+- [Overview](#overview)
+- [Motivation](#motivation)
+- [Prerequisites](#prerequisites)
+- [Project Structure](#project-structure)
+- [Lambda Function Details](#lambda-function-details)
+- [GitHub Actions Workflow](#github-actions-workflow)
+- [Setup & Usage](#setup--usage)
+- [Testing the Lambda Function](#testing-the-lambda-function)
+- [Troubleshooting](#troubleshooting)
+- [License](#license)
+
 ## Overview
 
-This project demonstrates an automated deployment pipeline for an AWS Lambda function using GitHub Actions.
+This project demonstrates a fully automated CI/CD pipeline for deploying an AWS Lambda function using GitHub Actions. It is designed for serverless workloads and rapid iteration.
 
-- **Language:** Python
-- **CI/CD:** GitHub Actions
-- **Cloud:** AWS Lambda
+## Motivation
 
-## Lambda Function
+Automating Lambda deployments reduces manual errors, speeds up development, and ensures consistent releases. This template helps you:
+- Package and deploy Python Lambda functions
+- Use GitHub Actions for CI/CD
+- Integrate with AWS securely using GitHub secrets
 
-The Lambda function (`package/lamda_function.py`) processes incoming events and returns a simple greeting message.
+## Prerequisites
 
-## Workflow
-
-The GitHub Actions workflow (`.github/workflows/lamda.yml`) automates:
-- Dependency installation
-- Packaging the Lambda function
-- Deploying to AWS Lambda
-
-## Usage
-
-1. Update your AWS credentials and Lambda function name in the repository secrets.
-2. Push changes to the `main` branch to trigger deployment.
+- AWS account with permissions to update Lambda functions
+- AWS CLI configured (for manual testing)
+- GitHub repository with the following secrets set:
+  - `AWS_ACCESS_KEY_ID`
+  - `AWS_SECRET_ACCESS_KEY`
+  - `AWS_REGION`
+  - `LAMBDA_FUNCTION_NAME`
 
 ## Project Structure
 
-```
+```text
 aws-lambda-deployment/
 ├── LICENSE
 ├── README.md
@@ -40,5 +50,74 @@ aws-lambda-deployment/
         └── lamda.yml
 ```
 
----
+## Lambda Function Details
+
+The Lambda function is a simple Python handler that greets the user. You can extend it for your use case.
+
+```python
+import json
+
+def lambda_handler(event, context):
+    """
+    AWS Lambda handler function.
+    Parameters:
+    - event (dict): The event data passed to the function.
+    - context (object): Lambda context object.
+    Returns:
+    - dict: Response containing status code and body.
+    """
+    print("Received event:", json.dumps(event))
+    name = event.get('name', 'World')
+    message = f"Hello, {name}!"
+    return {
+        'statusCode': 200,
+        'body': json.dumps({'message': message})
+    }
+```
+
+## GitHub Actions Workflow
+
+The workflow (`.github/workflows/lamda.yml`) performs the following steps:
+
+- Checks out the code
+- Sets up Python
+- Installs dependencies (e.g., boto3)
+- Packages the Lambda function into a zip file
+- Configures AWS credentials using repository secrets
+- Deploys the zip to AWS Lambda using the AWS CLI
+
+## Setup & Usage
+
+1. **Fork or clone this repository.**
+2. **Set up GitHub secrets** as described in [Prerequisites](#prerequisites).
+3. **Edit your Lambda function** in `package/lamda_function.py` as needed.
+4. **Push changes to the `main` branch**. The workflow will run automatically and deploy your function.
+
+## Testing the Lambda Function
+
+You can test your Lambda function via the AWS Console or AWS CLI:
+
+```bash
+aws lambda invoke \
+  --function-name <YOUR_FUNCTION_NAME> \
+  --payload '{"name": "Alice"}' \
+  response.json
+cat response.json
+```
+
+Expected output:
+
+```json
+{"statusCode": 200, "body": "{\"message\": \"Hello, Alice!\"}"}
+```
+
+## Troubleshooting
+
+- **Workflow fails at AWS CLI step:** Check that your AWS credentials and region are correct and have sufficient permissions.
+- **Lambda not updating:** Ensure the function name in your secrets matches the actual Lambda function.
+- **Dependencies not found:** Add any required packages to the `pip install` step in the workflow.
+
+## License
+
+This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
