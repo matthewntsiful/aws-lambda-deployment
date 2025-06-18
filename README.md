@@ -27,6 +27,7 @@ This project demonstrates a fully automated CI/CD pipeline for deploying an AWS 
 ## Motivation
 
 Automating Lambda deployments reduces manual errors, speeds up development, and ensures consistent releases. This template helps you:
+
 - Package and deploy Python Lambda functions
 - Use GitHub Actions for CI/CD
 - Integrate with AWS securely using GitHub secrets
@@ -124,4 +125,3 @@ Expected output:
 ## License
 
 This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
