@@ -1,6 +1,6 @@
 # AWS Lambda Deployment
 
-[![Deploy AWS Lambda](https://github.com/Matthieu/aws-lambda-deployment/actions/workflows/lambda.yml/badge.svg)](https://github.com/Matthieu/aws-lambda-deployment/actions/workflows/lambda.yml)
+[![Deploy AWS Lambda](https://github.com/matthewntsiful/aws-lambda-deployment/actions/workflows/lambda.yml/badge.svg)](https://github.com/matthewntsiful/aws-lambda-deployment/actions/workflows/lambda.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.x-blue)](https://www.python.org/)
 [![AWS Lambda](https://img.shields.io/badge/AWS-Lambda-orange.svg)](https://aws.amazon.com/lambda/)
