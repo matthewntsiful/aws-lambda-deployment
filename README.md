@@ -19,6 +19,7 @@
 - [Testing the Lambda Function](#testing-the-lambda-function)
 - [Troubleshooting](#troubleshooting)
 - [License](#license)
+- [Automated Dependency Updates](#automated-dependency-updates)
 
 ## Overview
 
@@ -121,6 +122,40 @@ Expected output:
 - **Workflow fails at AWS CLI step:** Check that your AWS credentials and region are correct and have sufficient permissions.
 - **Lambda not updating:** Ensure the function name in your secrets matches the actual Lambda function.
 - **Dependencies not found:** Add any required packages to the `pip install` step in the workflow.
+
+## Automated Dependency Updates
+
+This repository uses [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/about-dependabot-version-updates) to keep dependencies up to date automatically.
+
+Dependabot is configured to monitor:
+
+- **GitHub Actions workflows**: Checks for updates to GitHub Actions used in your workflows every week.
+- **Python (pip) dependencies**: Checks for updates to Python packages in the `/package/` directory every week.
+
+Configuration is managed in [`.github/dependabot.yml`](.github/dependabot.yml):
+
+```yaml
+version: 2
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+  - package-ecosystem: "pip"
+    directory: "/package/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 5
+    commit-message:
+      prefix: "chore"
+      include: "scope"
+```
+
+When updates are available, Dependabot will automatically open pull requests to keep your dependencies secure and up to date.
 
 ## License
 
