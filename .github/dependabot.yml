@@ -1,0 +1,26 @@
+# Dependabot configuration file
+# See https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/configuration-options-for-dependency-updates
+
+version: 2
+
+# Configure updates for the GitHub Actions ecosystem
+updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"  # Update GitHub Actions in the root directory
+    schedule:
+      interval: "weekly"  # Check for updates once a week
+    open-pull-requests-limit: 5  # Limit the number of open pull requests
+    commit-message:
+      prefix: "chore"  # Prefix commit messages with "chore"
+      include: "scope"  # Include the scope of the update in the commit message
+
+# Configure updates for the Python ecosystem (pip)
+  - package-ecosystem: "pip"
+    directory: "/package/"  # Update Python packages in the package directory
+    schedule:
+      interval: "weekly"  # Check for updates once a week
+    open-pull-requests-limit: 5  # Limit the number of open pull requests
+    commit-message:
+      prefix: "chore"  # Prefix commit messages with "chore"
+      include: "scope"  # Include the scope of the update in the commit message
+
