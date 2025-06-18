@@ -6,8 +6,17 @@ on:
       - main  # Runs when changes are pushed to the main branch
     paths-ignore:
       - README.md  # Ignores changes to README.md
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - README.md
+    types: [opened, synchronize, reopened]
+    # Prevent workflow from running on Dependabot PRs
+    # We'll use a job-level if condition below
 jobs:
   deploy:
+    if: github.actor != 'dependabot[bot]'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
