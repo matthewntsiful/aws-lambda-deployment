@@ -1,7 +1,11 @@
 # AWS Lambda Deployment
 
-[![CI/CD](https://github.com/Matthieu/Jomacs_DevOps/actions/workflows/lamda.yml/badge.svg)](https://github.com/Matthieu/Jomacs_DevOps/actions/workflows/lamda.yml)
+[![Deploy AWS Lambda](https://github.com/Matthieu/aws-lambda-deployment/actions/workflows/lambda.yml/badge.svg)](https://github.com/Matthieu/aws-lambda-deployment/actions/workflows/lambda.yml)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/python-3.x-blue)](https://www.python.org/)
+[![AWS Lambda](https://img.shields.io/badge/AWS-Lambda-orange.svg)](https://aws.amazon.com/lambda/)
+[![Serverless](https://img.shields.io/badge/serverless-ready-brightgreen.svg)](https://aws.amazon.com/lambda/)
+[![Maintenance](https://img.shields.io/badge/maintained-yes-green.svg)](https://github.com/Matthieu/aws-lambda-deployment/commits/main)
 
 ## Table of Contents
 
